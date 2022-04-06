@@ -20,9 +20,9 @@ model Book {
   id       Int             @id @default(autoincrement())
   title    String
   cover    String
-  views    Int
-  like     Int
-  dislike  Int
+  views    Int?            @default(0)
+  like     Int?            @default(0)
+  dislike  Int?            @default(0)
   author   Author_Book[]
   favorite Favorite[]
   topic    Topic_Book[]
@@ -60,7 +60,7 @@ model Favorite {
 
 model Topic {
   id    Int          @id @default(autoincrement())
-  name  String
+  name  String[]
   topic Topic_Book[]
 }
 
