@@ -20,14 +20,13 @@ model Book {
   id       Int             @id @default(autoincrement())
   title    String
   cover    String
-  views    Int
-  like     Int
-  dislike  Int
+  views    Int?            @default(0)
+  like     Int?            @default(0)
+  dislike  Int?            @default(0)
   author   Author_Book[]
   favorite Favorite[]
   topic    Topic_Book[]
   language Language_Book[]
-
 }
 
 model Author_Book {
@@ -61,14 +60,12 @@ model Favorite {
 
 model Topic {
   id    Int          @id @default(autoincrement())
-  name  String
+  name  String[]
   topic Topic_Book[]
-
 }
 
 model Topic_Book {
   id Int @id @default(autoincrement())
-
   Topic   Topic? @relation(fields: [topicId], references: [id])
   topicId Int?
   Book    Book?  @relation(fields: [bookId], references: [id])
@@ -79,12 +76,10 @@ model Language {
   id   Int             @id @default(autoincrement())
   name String
   book Language_Book[]
-
 }
 
 model Language_Book {
   id Int @id @default(autoincrement())
-
   Language   Language? @relation(fields: [languageId], references: [id])
   languageId Int?
   Book       Book?     @relation(fields: [bookId], references: [id])
