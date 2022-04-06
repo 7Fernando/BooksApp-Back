@@ -17,31 +17,30 @@ model Author {
 }
 
 model Book {
-  id         Int             @id @default(autoincrement())
-  title      String
-  cover      String
-  views      Int
-  likes      Int
-  dislike    Int
-  author     Author_Book[]
-  favorite   Favorite[]
-  topic      Topic[]
-  language   Languaje_Book[]
-  Topic_Book Topic_Book[]
+  id       Int             @id @default(autoincrement())
+  title    String
+  cover    String
+  views    Int
+  like     Int
+  dislike  Int
+  author   Author_Book[]
+  favorite Favorite[]
+  topic    Topic_Book[]
+  language Language_Book[]
 }
 
 model Author_Book {
-  id       Int    @id @default(autoincrement())
-  book     Book   @relation(fields: [bookId], references: [id])
-  bookId   Int
-  author   Author @relation(fields: [authorId], references: [id])
-  authorId Int
+  id       Int     @id @unique @default(autoincrement())
+  Book     Book?   @relation(fields: [bookId], references: [id])
+  bookId   Int?
+  Author   Author? @relation(fields: [authorId], references: [id])
+  authorId Int?
 }
 
 model User {
   id       Int        @id @default(autoincrement())
   name     String
-  mail     String     @unique
+  mail     String
   role     Role       @default(USER)
   favorite Favorite[]
 }
@@ -60,31 +59,29 @@ model Favorite {
 }
 
 model Topic {
-  id     Int     @id @default(autoincrement())
-  name   String
-  book   Book    @relation(fields: [bookId], references: [id])
-  bookId Int
-  topic  Topic_Book[]
+  id    Int          @id @default(autoincrement())
+  name  String
+  topic Topic_Book[]
 }
 
 model Topic_Book {
-  id      Int   @id @default(autoincrement())
-  book    Book  @relation(fields: [bookId], references: [id])
-  bookId  Int
-  topic   Topic @relation(fields: [topicId], references: [id])
-  topicId Int   @unique
+  id Int @id @default(autoincrement())
+  Topic   Topic? @relation(fields: [topicId], references: [id])
+  topicId Int?
+  Book    Book?  @relation(fields: [bookId], references: [id])
+  bookId  Int?
 }
 
-model Languaje {
-  id            Int             @id @default(autoincrement())
-  name          String
-  Languaje_Book Languaje_Book[]
+model Language {
+  id   Int             @id @default(autoincrement())
+  name String
+  book Language_Book[]
 }
 
-model Languaje_Book {
-  id         Int      @id @default(autoincrement())
-  languaje   Languaje @relation(fields: [languajeId], references: [id])
-  languajeId Int
-  book       Book     @relation(fields: [bookId], references: [id])
-  bookId     Int
+model Language_Book {
+  id Int @id @default(autoincrement())
+  Language   Language? @relation(fields: [languageId], references: [id])
+  languageId Int?
+  Book       Book?     @relation(fields: [bookId], references: [id])
+  bookId     Int?
 }
