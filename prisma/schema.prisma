@@ -1,0 +1,90 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Author {
+  id   Int           @id @default(autoincrement())
+  name String
+  book Author_Book[]
+}
+
+model Book {
+  id         Int             @id @default(autoincrement())
+  title      String
+  cover      String
+  views      Int
+  likes      Int
+  dislike    Int
+  author     Author_Book[]
+  favorite   Favorite[]
+  topic      Topic[]
+  language   Languaje_Book[]
+  Topic_Book Topic_Book[]
+}
+
+model Author_Book {
+  id       Int    @id @default(autoincrement())
+  book     Book   @relation(fields: [bookId], references: [id])
+  bookId   Int
+  author   Author @relation(fields: [authorId], references: [id])
+  authorId Int
+}
+
+model User {
+  id       Int        @id @default(autoincrement())
+  name     String
+  mail     String     @unique
+  role     Role       @default(USER)
+  favorite Favorite[]
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model Favorite {
+  id     Int  @id @default(autoincrement())
+  user   User @relation(fields: [userId], references: [id])
+  userId Int
+  book   Book @relation(fields: [bookId], references: [id])
+  bookId Int
+}
+
+model Topic {
+  id     Int     @id @default(autoincrement())
+  name   String
+  book   Book    @relation(fields: [bookId], references: [id])
+  bookId Int
+  topic  Topic_Book[]
+}
+
+model Topic_Book {
+  id      Int   @id @default(autoincrement())
+  book    Book  @relation(fields: [bookId], references: [id])
+  bookId  Int
+  topic   Topic @relation(fields: [topicId], references: [id])
+  topicId Int   @unique
+}
+
+model Languaje {
+  id            Int             @id @default(autoincrement())
+  name          String
+  Languaje_Book Languaje_Book[]
+}
+
+model Languaje_Book {
+  id         Int      @id @default(autoincrement())
+  languaje   Languaje @relation(fields: [languajeId], references: [id])
+  languajeId Int
+  book       Book     @relation(fields: [bookId], references: [id])
+  bookId     Int
+}
