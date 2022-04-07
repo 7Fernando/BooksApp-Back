@@ -60,12 +60,12 @@ model Favorite {
 
 model Topic {
   id    Int          @id @default(autoincrement())
-  name  String[]
+  name  String[]     @unique
   topic Topic_Book[]
 }
 
 model Topic_Book {
-  id Int @id @default(autoincrement())
+  id      Int    @id @default(autoincrement())
   Topic   Topic? @relation(fields: [topicId], references: [id])
   topicId Int?
   Book    Book?  @relation(fields: [bookId], references: [id])
@@ -79,7 +79,7 @@ model Language {
 }
 
 model Language_Book {
-  id Int @id @default(autoincrement())
+  id         Int       @id @default(autoincrement())
   Language   Language? @relation(fields: [languageId], references: [id])
   languageId Int?
   Book       Book?     @relation(fields: [bookId], references: [id])
