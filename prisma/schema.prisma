@@ -11,31 +11,31 @@ datasource db {
 }
 
 model Author {
-  id   Int           @id @default(autoincrement())
-  name String
-  book Author_Book[]
+  id   Int    @id @default(autoincrement())
+  name String 
+  book Book[]
 }
 
 model Book {
-  id       Int             @id @default(autoincrement())
+  id       Int        @id @default(autoincrement())
   title    String
   cover    String
-  views    Int?            @default(0)
-  like     Int?            @default(0)
-  dislike  Int?            @default(0)
-  author   Author_Book[]
+  views    Int?       @default(0)
+  like     Int?       @default(0)
+  dislike  Int?       @default(0)
+  author   Author[]
   favorite Favorite[]
-  topic    Topic_Book[]
-  language Language_Book[]
+  topic    Topic[]
+  language Language[]
 }
 
-model Author_Book {
-  id       Int     @id @unique @default(autoincrement())
-  Book     Book?   @relation(fields: [bookId], references: [id])
-  bookId   Int?
-  Author   Author? @relation(fields: [authorId], references: [id])
-  authorId Int?
-}
+// model Author_Book {
+//   id       Int     @id @unique @default(autoincrement())
+//   Book     Book?   @relation(fields: [bookId], references: [id])
+//   bookId   Int?
+//   Author   Author? @relation(fields: [authorId], references: [id])
+//   authorId Int?
+// }
 
 model User {
   id       Int        @id @default(autoincrement())
@@ -59,29 +59,29 @@ model Favorite {
 }
 
 model Topic {
-  id    Int          @id @default(autoincrement())
-  name  String[]     @unique
-  topic Topic_Book[]
+  id   Int      @id @default(autoincrement())
+  name String[] @unique
+  book Book[]
 }
 
-model Topic_Book {
-  id      Int    @id @default(autoincrement())
-  Topic   Topic? @relation(fields: [topicId], references: [id])
-  topicId Int?
-  Book    Book?  @relation(fields: [bookId], references: [id])
-  bookId  Int?
-}
+// model Topic_Book {
+//   id      Int    @id @default(autoincrement())
+//   Topic   Topic? @relation(fields: [topicId], references: [id])
+//   topicId Int?
+//   Book    Book?  @relation(fields: [bookId], references: [id])
+//   bookId  Int?
+// }
 
 model Language {
-  id   Int             @id @default(autoincrement())
-  name String
-  book Language_Book[]
+  id   Int    @id @default(autoincrement())
+  name String @unique
+  book Book[]
 }
 
-model Language_Book {
-  id         Int       @id @default(autoincrement())
-  Language   Language? @relation(fields: [languageId], references: [id])
-  languageId Int?
-  Book       Book?     @relation(fields: [bookId], references: [id])
-  bookId     Int?
-}
+// model Language_Book {
+//   id         Int       @id @default(autoincrement())
+//   Language   Language? @relation(fields: [languageId], references: [id])
+//   languageId Int?
+//   Book       Book?     @relation(fields: [bookId], references: [id])
+//   bookId     Int?
+// }
