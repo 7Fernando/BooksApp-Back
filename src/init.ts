@@ -4,17 +4,19 @@ import { seedAuthors } from "./sedders/authors";
 import { seedTopics } from "./sedders/topics";
 import { seedLenguajes } from "./sedders/languages";
 import { seedBooks } from "./sedders/books";
-import { text } from "stream/consumers";
 const prisma = new PrismaClient();
 
 // const getInfo = async (prop: string) => {
-//   const { data } = await axios.get(");
+//   const { data } = await axios.get("https://gutendex.com/books/?languages=es");
 //   let result: any = [];
+
+//   console.log(data);
+
 //   prop !== "books"
 //     ? data.results.forEach((element: any) => {
 //         prop === "authors"
 //           ? element.authors.map((element: { name: string }) => {
-//               result.push({ name: element.name });
+//               result.push({ name: element.name.replace(",", "") });
 //               result = [...new Set(result)];
 //             })
 //           : // ? element.authors.map((element: { name: string }) => {
@@ -50,6 +52,11 @@ export const init = async () => {
   //   getInfo("authors"),
   //   getInfo("languages"),
   // ]);
+
+  
+
+
+  
 
   let verificator = await prisma.book.findMany({});
 
