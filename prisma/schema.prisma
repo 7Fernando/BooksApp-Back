@@ -64,24 +64,3 @@ model Language {
   name String @unique
   book Book[]
 }
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-model Language_Book {
-  id Int @id @default(autoincrement())
-  Language   Language? @relation(fields: [languageId], references: [id])
-  languageId Int?
-  Book       Book?     @relation(fields: [bookId], references: [id])
-  bookId     Int?
-}
-=======
-// model Language_Book {
-//   id         Int       @id @default(autoincrement())
-//   Language   Language? @relation(fields: [languageId], references: [id])
-//   languageId Int?
-//   Book       Book?     @relation(fields: [bookId], references: [id])
-//   bookId     Int?
-// }
->>>>>>> edef22157d1dec190b63c4c2674f4f75645f6880
-=======
->>>>>>> 3538efe288619d5e94592674b9a861297fca34d3
