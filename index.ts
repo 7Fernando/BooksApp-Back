@@ -5,5 +5,7 @@ const PORT = process.env.PORT || 3001;
 
 server.listen(PORT, async () => {
   await init();
+
   console.log("server is runing on port", PORT);
-});
+
+})
