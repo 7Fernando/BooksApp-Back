@@ -1,8 +1,11 @@
-export const seedLenguajes =[
-    {
-        name:"en"
-    },
-    {
-        name:"es"
-    }
-]
+export const seedLenguajes = [
+  {
+    name: "en",
+  },
+  {
+    name: "es",
+  },
+  {
+    name: "tl",
+  },
+];
