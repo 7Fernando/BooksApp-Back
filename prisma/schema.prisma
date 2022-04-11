@@ -12,21 +12,23 @@ datasource db {
 
 model Author {
   id   Int    @id @default(autoincrement())
-  name String 
+  name String @unique
   book Book[]
 }
 
 model Book {
-  id       Int        @id @default(autoincrement())
-  title    String
-  cover    String
-  views    Int?       @default(0)
-  like     Int?       @default(0)
-  dislike  Int?       @default(0)
-  author   Author[]
-  favorite Favorite[]
-  topic    Topic[]
-  language Language[]
+  id        Int        @id @default(autoincrement())
+  title     String
+  cover     String
+  views     Int?       @default(0)
+  like      Int?       @default(0)
+  dislike   Int?       @default(0)
+  createdAt DateTime   @default(now())
+  epub      String
+  author    Author[]
+  favorite  Favorite[]
+  topic     Topic[]
+  language  Language[]
 }
 
 // model Author_Book {
@@ -51,16 +53,17 @@ enum Role {
 }
 
 model Favorite {
-  id     Int  @id @default(autoincrement())
-  user   User @relation(fields: [userId], references: [id])
-  userId Int
-  book   Book @relation(fields: [bookId], references: [id])
-  bookId Int
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+  book      Book     @relation(fields: [bookId], references: [id])
+  bookId    Int
 }
 
 model Topic {
-  id   Int      @id @default(autoincrement())
-  name String[] @unique
+  id   Int    @id @default(autoincrement())
+  name String @unique
   book Book[]
 }
 

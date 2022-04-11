@@ -3,6 +3,6 @@ import { init } from "./src/init";
 const PORT = process.env.PORT || 3001;
 
 server.listen(PORT, async () => {
-  await init()
+  await init();
   console.log("server is runing ", PORT);
 });
