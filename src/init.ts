@@ -8,7 +8,7 @@ import { text } from "stream/consumers";
 const prisma = new PrismaClient();
 
 // const getInfo = async (prop: string) => {
-//   const { data } = await axios.get("https://gutendex.com/books/");
+//   const { data } = await axios.get(");
 //   let result: any = [];
 //   prop !== "books"
 //     ? data.results.forEach((element: any) => {
