@@ -31,14 +31,6 @@ model Book {
   language  Language[]
 }
 
-// model Author_Book {
-//   id       Int     @id @unique @default(autoincrement())
-//   Book     Book?   @relation(fields: [bookId], references: [id])
-//   bookId   Int?
-//   Author   Author? @relation(fields: [authorId], references: [id])
-//   authorId Int?
-// }
-
 model User {
   id       Int        @id @default(autoincrement())
   name     String
@@ -67,24 +59,9 @@ model Topic {
   book Book[]
 }
 
-// model Topic_Book {
-//   id      Int    @id @default(autoincrement())
-//   Topic   Topic? @relation(fields: [topicId], references: [id])
-//   topicId Int?
-//   Book    Book?  @relation(fields: [bookId], references: [id])
-//   bookId  Int?
-// }
-
 model Language {
   id   Int    @id @default(autoincrement())
   name String @unique
   book Book[]
 }
 
-// model Language_Book {
-//   id         Int       @id @default(autoincrement())
-//   Language   Language? @relation(fields: [languageId], references: [id])
-//   languageId Int?
-//   Book       Book?     @relation(fields: [bookId], references: [id])
-//   bookId     Int?
-// }
