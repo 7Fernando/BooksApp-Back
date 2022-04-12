@@ -124,5 +124,5 @@ export const init = async () => {
     ]);
   }
 
-  console.log("DATABASE SUCCESSFUL");
+  console.log("DATABASE SUCCESSFULLY LOADED");
 };
