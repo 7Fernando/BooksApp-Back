@@ -1,13 +1,20 @@
 import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
+import {getBookByName} from '../../Helpers/books'
 const prisma = new PrismaClient();
 
 export const getBooks = async (req: Request, res: Response) => {
-  const books = await prisma.book.findMany();
-  try {
-    res.send(books);
-  } catch (error) {
-    console.error(error);
+  const name: any = req.query.name || undefined
+  if(!req.query.name){
+    const books = await prisma.book.findMany();
+    try {
+      res.send(books);
+    } catch (error) {
+      console.error(error);
+    }
+  }else{
+
+    res.status(200).send(await getBookByName(name))
   }
 };
 
@@ -30,16 +37,15 @@ export const getBookById = async (req: Request, res: Response) => {
   }
 };
 
-export const getBookByName = async (req: Request, res: Response) => {
-  const name: any = req.query.name;
+// export const getBookByName = async (name: string) => {
+// console.log(name)
+//   try {
+//     let bookNameFound = await prisma.book.findMany({
+//       where: { title: { contains: name, mode: "insensitive" } },
+//     });
 
-  try {
-    let bookNameFound = await prisma.book.findMany({
-      where: { title: { contains: name, mode: "insensitive" } },
-    });
-
-    res.send(bookNameFound);
-  } catch (error) {
-    console.error(error);
-  }
-};
+//     return(bookNameFound);
+//   } catch (error) {
+//     console.error(error);
+//   }
+// };
