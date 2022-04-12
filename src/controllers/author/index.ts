@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
-import { getAuthorByName } from "../../helpers/author";
+import { getAuthorByName } from "../../helpers33/author";
 const prisma = new PrismaClient();
 
 export const getAuthor = async (req: Request, res: Response) => {

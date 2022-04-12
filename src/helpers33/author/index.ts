@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
-
+      
 export const getAuthorByName = async (name:string)=>{
     try{
         const result = await prisma.author.findMany({
