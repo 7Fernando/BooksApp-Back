@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
-import {getBookByName} from '../../Helpers/books'
+import {getBookByName} from '../../helpers/books'
 const prisma = new PrismaClient();
 
 export const getBooks = async (req: Request, res: Response) => {
