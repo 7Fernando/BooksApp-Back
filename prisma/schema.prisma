@@ -64,4 +64,3 @@ model Language {
   name String @unique
   book Book[]
 }
-
