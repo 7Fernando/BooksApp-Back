@@ -13,8 +13,12 @@ export const getBooks = async (req: Request, res: Response) => {
       console.error(error);
     }
   }else{
-
-    res.status(200).send(await getBookByName(name))
+    const booksByName: any  = await getBookByName(name)
+    if(booksByName.length){
+      res.status(200).send(booksByName)
+    } else {
+      res.status(404).send(["No book found with that name"])
+    }
   }
 };
 

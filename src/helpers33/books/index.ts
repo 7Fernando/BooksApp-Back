@@ -8,9 +8,8 @@ export const getBookByName = async (name: string) => {
         let bookNameFound = await prisma.book.findMany({
           where: { title: { contains: name, mode: "insensitive" } },
         });
-    
         return(bookNameFound);
       } catch (error) {
-        console.error(error);
+        console.log(error);
       }
     };
