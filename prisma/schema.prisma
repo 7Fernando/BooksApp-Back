@@ -1,0 +1,66 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Author {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+  book Book[]
+}
+
+model Book {
+  id        Int        @id @default(autoincrement())
+  title     String
+  cover     String
+  views     Int?       @default(0)
+  like      Int?       @default(0)
+  dislike   Int?       @default(0)
+  createdAt DateTime   @default(now())
+  epub      String
+  author    Author[]
+  favorite  Favorite[]
+  topic     Topic[]
+  language  Language[]
+}
+
+model User {
+  id       Int        @id @default(autoincrement())
+  name     String
+  mail     String
+  role     Role       @default(USER)
+  favorite Favorite[]
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model Favorite {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+  book      Book     @relation(fields: [bookId], references: [id])
+  bookId    Int
+}
+
+model Topic {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+  book Book[]
+}
+
+model Language {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+  book Book[]
+}
