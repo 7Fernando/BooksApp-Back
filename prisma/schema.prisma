@@ -34,7 +34,8 @@ model Book {
 model User {
   id       Int        @id @default(autoincrement())
   name     String
-  mail     String
+  mail     String     @unique
+  picture  String?
   role     Role       @default(USER)
   favorite Favorite[]
 }
