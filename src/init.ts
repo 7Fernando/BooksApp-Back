@@ -79,6 +79,8 @@ export const init = async () => {
             title: b.title,
             cover: b.cover,
             epub: b.epub,
+            views:Math.floor(Math.random() * (1000 - 0)) + 0,
+            like:Math.floor(Math.random() * (1000 - 0)) + 0,
           },
         });
 
