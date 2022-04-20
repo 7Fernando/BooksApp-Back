@@ -4,6 +4,7 @@ import { seedAuthors } from "./sedders/authors";
 import { seedTopics } from "./sedders/topics";
 import { seedLenguajes } from "./sedders/languages";
 import { seedBooks } from "./sedders/books";
+import { seedUser } from "./sedders/user";
 const prisma = new PrismaClient();
 
 // const getInfo = async (prop: string) => {
@@ -53,16 +54,12 @@ export const init = async () => {
   //   getInfo("languages"),
   // ]);
 
-  
-
-
-  
-
   let verificator = await prisma.book.findMany({});
 
   if (verificator.length === 0) {
     await prisma.author.createMany({ data: seedAuthors, skipDuplicates: true });
     await prisma.topic.createMany({ data: seedTopics, skipDuplicates: true });
+    await prisma.user.createMany({ data: seedUser, skipDuplicates: true });
     await prisma.language.createMany({
       data: seedLenguajes,
       skipDuplicates: true,
@@ -79,6 +76,8 @@ export const init = async () => {
             title: b.title,
             cover: b.cover,
             epub: b.epub,
+            views: Math.floor(Math.random() * (1000 - 0)) + 0,
+            like: Math.floor(Math.random() * (1000 - 0)) + 0,
           },
         });
 
