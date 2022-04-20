@@ -1,4 +1,5 @@
 import { PrismaClient, User } from "@prisma/client";
+import { sendEmail } from "../../controllers/email/index"
 const prisma = new PrismaClient();
 
 export const newUser = async (data: any) => {
@@ -9,6 +10,10 @@ export const newUser = async (data: any) => {
         }
     })
     if(!findUser){
+        sendEmail(
+            data.mail,
+            `Welcome ${data.name}! \n you were successfully registered! \n let's read!`
+          );
         const newNewUser: User = await prisma.user.create({
             data: {
                 name: data.name,
