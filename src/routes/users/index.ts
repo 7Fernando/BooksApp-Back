@@ -1,9 +1,10 @@
 import { Router } from "express";
 import { getUser, postUser } from "../../controllers/users";
+import { verifyToken } from "../../middleware/auth";
 const router = Router();
 
 router.get('/', getUser)
-router.post('/', postUser)
+router.post('/', verifyToken, postUser)
 
 
 
