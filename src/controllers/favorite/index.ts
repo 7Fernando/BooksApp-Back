@@ -24,7 +24,7 @@ export const postFavorite = async( req: Request, res: Response)=>{
     try{
         const {userId, bookId} = req.body
         const newFavorite = await saveFavourite( userId , bookId);
-        newFavorite? res.status(200).send(newFavorite) : res.status(400).send("no hay favoritos")
+        newFavorite? res.status(400).send("no hay favorito") : res.status(200).send(newFavorite)
     }catch(error){
         console.log(error)
     }
