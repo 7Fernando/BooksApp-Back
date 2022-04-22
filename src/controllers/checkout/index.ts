@@ -21,7 +21,8 @@ export const postCheckout = async (req: Request, res: Response) => {
       { id: 2, name: "price_1KqMgDJx3UlXGWRu7GTGcMpr" },
       { id: 3, name: "price_1KqMgvJx3UlXGWRuLsHJvt2D" },
     ];
-    const plan = plans.find((p) => p.id === idPlan);
+    const plan = plans.find((p) => p.id === Number(idPlan));
+
 
     const customer = await stripe.customers.create({
       payment_method: payment_method,
@@ -30,7 +31,7 @@ export const postCheckout = async (req: Request, res: Response) => {
         default_payment_method: payment_method,
       },
     });
-
+    console.log(customer)
     const subscription = await stripe.subscriptions.create({
       customer: customer.id,
       items: [{ plan: plan?.name }],
@@ -46,7 +47,8 @@ export const postCheckout = async (req: Request, res: Response) => {
       status: status,
     });
     //res.json({hola:subscription})
-  } catch (error) {
+  } catch (error:any) {
     console.error("ellll", error);
+    return res.json({ message:error.raw.message });
   }
 };
