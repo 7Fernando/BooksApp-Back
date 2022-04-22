@@ -3,7 +3,7 @@ import { getBooks, getBookById } from "../../controllers/books";
 const router = Router();
 import { verifyToken } from "../../middleware/auth";
 
-router.get('/', getBooks,verifyToken);
+router.get('/', verifyToken, getBooks);
 // router.get('/name', getBookByName);
 router.get('/:id', getBookById);
 

@@ -6,12 +6,22 @@ export const verifyToken = (
   res: Response,
   next: NextFunction
 ) => {
-  const token: any = req.headers.authorization;
+  try {
+    const token: any = req.headers.authorization;
+  console.log('token:', token)
   const decode: any = jwt.decode(token);
-  console.log(decode);
+  console.log('decorde',decode);
 
   const verifyTo = decode?.aud[0] === process.env.SECRET;
-  console.log(verifyTo);
+  if(verifyTo === false){
+    res.status(400).send('Access denied')
+  }
+  console.log('verifyTo',verifyTo);
 
   next();
+  } catch (error) {
+    console.error('error:',error);
+    return res.status(404).send({'msg':error})
+  }
+  
 };
