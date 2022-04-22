@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { Favorite, PrismaClient } from "@prisma/client";
-import { newUser, saveFavourite } from '../../helpers33/users';
+import { newUser  } from '../../helpers33/users';
 const prisma = new PrismaClient();
 
 export const getUser = async(req: Request, res: Response ) => {
@@ -21,19 +21,9 @@ export const postUser = async (req: Request, res: Response) => {
     try {
         const { name, mail, picture } = req.body;
         const newNewUser = await newUser({ name, mail, picture }); //CORREGIR EL TIPO DE DATO
-        newNewUser? res.status(201).send("User created") : res.status(400).send("User not created")
+        newNewUser? res.status(201).send(newNewUser) : res.status(400).send("User not created")
     } catch (error) {
         console.error(error)
-    }
-}
-
-export const postFavorite = async( req: Request, res: Response)=>{
-    try{
-        const {userId, bookId} = req.body
-        const newFavorite = await saveFavourite( userId , bookId);
-        newFavorite? res.status(200).send(newFavorite) : res.status(400).send("no hay favoritos")
-    }catch(error){
-        console.log(error)
     }
 }
 
