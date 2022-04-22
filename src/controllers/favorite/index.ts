@@ -7,14 +7,25 @@ const prisma = new PrismaClient();
 
 export const getFavorite = async (req: Request, res: Response)=>{
     try{
-        const id : any = req.query.id
-        const favorites = await prisma.favorite.findMany({
-            where:{userId: Number(id)},
+        const mail : any = req.query.mail
+        const findUser =  await prisma.user.findUnique({
+            where:{
+                mail: mail
+            }
+        })
+        let  data 
+        if(findUser){
+        data = await prisma.favorite.findMany({
+            where:{userId: Number(findUser.id)},
             include:{
                 book: true
             }
-        })
-        favorites.length !==0 ? res.status(200).send(favorites) : res.send([])
+        }) 
+        res.status(200).send(data)
+    }else{
+        res.send([])
+    }  
+
     }catch(error){
         console.log(error)
     }
@@ -22,6 +33,7 @@ export const getFavorite = async (req: Request, res: Response)=>{
 
 
 export const postFavorite = async( req: Request, res: Response)=>{
+
     try{
         const userId = req.body.userId
         const bookId = req.body.bookId
@@ -38,33 +50,32 @@ export const postFavorite = async( req: Request, res: Response)=>{
         }else{
             res.status(200).send("favorite already exists")
         }
-    }catch(error){
+    }
+    catch(error){
         console.log(error)
     }
-
-    
-//     try{
-//         const {userId, bookId} = req.body
-//         const newFavorite = await saveFavourite( userId , bookId);
-//         newFavorite? res.status(400).send("no hay favorito") : res.status(200).send(newFavorite)
-//     }catch(error){
-//         console.log(error)
-//     }
-// }
 }
+
 
 export const removeFavorite = async( req: Request, res: Response)=>{
     try{
-        const userId = req.query.userId
+        const userId : any= req.query.userId
         const bookId = req.query.bookId
-        const newFavorite = await prisma.favorite.deleteMany({
+        const findUser =  await prisma.user.findUnique({
             where:{
-                userId: Number(userId),
+                mail: userId
+            }
+        })
+
+        const removeFavorite = await prisma.favorite.deleteMany({
+            where:{
+                userId: findUser?.id,
                 bookId: Number(bookId)
             }
         })
-        newFavorite? res.status(200).send(newFavorite) : res.status(400).send("no hay favorito")
+        removeFavorite ? res.status(200).send(removeFavorite) : res.status(400).send("no hay favorito")
     }catch(error){
         console.log(error)
     }
 }
+

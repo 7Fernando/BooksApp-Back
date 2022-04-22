@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { postCheckout } from '../../controllers/checkout';
-
-const router = Router()
+ 
+const router = Router();
 
 router.post('/', postCheckout)
 
