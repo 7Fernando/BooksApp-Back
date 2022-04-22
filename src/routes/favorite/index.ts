@@ -5,7 +5,7 @@ const router = Router();
 
 router.get('/', getFavorite)
 router.post('/', postFavorite)
-router.delete('/:id', removeFavorite)
+router.delete('/', removeFavorite)
 
 
 export default router;

@@ -7,7 +7,7 @@ export const getUser = async(req: Request, res: Response ) => {
     try {
         const allUser = await prisma.user.findMany({
             include:{
-                favorite: true
+                favorite: true,
             }
         })
         allUser.length !==0 ? res.status(200).send(allUser) : res.status(404).send({msg:"User not found"})
