@@ -19,7 +19,7 @@ export const getUser = async(req: Request, res: Response ) => {
 
 export const postUser = async (req: Request, res: Response) => { 
     try {
-        const { name, mail, picture } = req.body
+        const { name, mail, picture } = req.body;
         const newNewUser = await newUser({ name, mail, picture }); //CORREGIR EL TIPO DE DATO
         newNewUser? res.status(201).send(newNewUser) : res.status(400).send("User not created")
     } catch (error) {
