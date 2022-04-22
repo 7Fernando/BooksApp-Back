@@ -4,6 +4,8 @@ import {getBookByName} from '../../helpers33/books'
 const prisma = new PrismaClient();
 
 export const getBooks = async (req: Request, res: Response) => {
+  
+  
   const name: any = req.query.name || undefined
   if(!req.query.name){
     const books = await prisma.book.findMany();
