@@ -106,7 +106,7 @@ export const init = async () => {
             data: { topic: { connect: arrayTopic } },
           });
         });
-
+ 
         b.languages.map(async (l: any) => {
           let findLanguages = await prisma.language.findUnique({
             where: {

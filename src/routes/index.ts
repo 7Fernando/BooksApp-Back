@@ -1,11 +1,11 @@
+import user from "./users";
+import books from './books';
+import topic from './topic';
+import author from './author';
 import { Router } from "express";
-import books from './books'
-import author from './author'
-import topic from './topic'
-import  language from './languege'
-
-import user from "./users"
-import  favorite  from "./favorite"
+import language from './languege';
+import favorite  from "./favorite";
+import checkout  from "./checkout";
 
 const router = Router();
 
@@ -15,6 +15,7 @@ router.use('/topic',topic);
 router.use('/language', language)
 router.use('/users', user)
 router.use('/favorites', favorite)
+router.use('/sub', checkout)
 
 
 
