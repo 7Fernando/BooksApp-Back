@@ -6,7 +6,7 @@ import { analytics } from "googleapis/build/src/apis/analytics";
 // const {STRIPE_URL} = process.env
 
 const { CHECKOUT_KEY } = process.env;
-console.log("keyDelEnv:", CHECKOUT_KEY);
+//console.log("keyDelEnv:", CHECKOUT_KEY);
 const stripe = new Stripe(CHECKOUT_KEY || "", {
   apiVersion: "2020-08-27",
 });

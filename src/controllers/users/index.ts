@@ -77,7 +77,7 @@ export const deleteUser = async (req: Request, res: Response) =>{
                 id: Number(id)
             }
         })
-      findUser?   res.status(200).send('Usuario Borrado') : res.status(400).send('No se pudo eliminar')
+      findUser?   res.status(200).send('User Deleted') : res.status(400).send('No se pudo eliminar')
     }catch(error){
         console.log(error)
     }
