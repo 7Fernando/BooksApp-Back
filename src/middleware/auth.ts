@@ -1,16 +1,10 @@
-import { Request, Response, NextFunction } from "express";
-// import jwt from "jsonwebtoken";
-// require ("dotenv").config();
+var { expressjwt: jwt } = require("express-jwt");
 
-export const verifyToken = (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ) => {
-    const token: any = req.headers.authorization;
-    // const decode = jwt.verify(token, process.env.SECRET_KEY || "secret");
-    // console.log(decode);
-    
-    if(!token) return res.status(401).send({msg: "Authorization denied"});
-    next();
-  };
+
+export const jwtCheck = 
+jwt({
+  secret: '75S5doLarmsiNKesQK1HkDYd8b6pM3L6',
+  audience: 'secreto',
+  issuer: 'https://dev-0h7i5plo.us.auth0.com/',
+  algorithms: ['HS256']
+}).unless({ path: ["/"] });
