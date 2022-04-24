@@ -1,8 +1,6 @@
 import { Router } from "express";
+
 import { getUser, postUser ,getUserById , deleteUser, modifyUser} from "../../controllers/users";
-
-
-
 
 
 const router = Router();
@@ -12,6 +10,7 @@ router.post('/', postUser)
 router.get('/:id',getUserById)
 router.delete('/:id', deleteUser)
 router.put('/', modifyUser)
+
 
 
 

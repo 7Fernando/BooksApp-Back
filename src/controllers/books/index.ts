@@ -61,7 +61,27 @@ export const postNewBook = async (req: Request, res: Response) => {
   } catch (error) {
     console.log(error);
   }
+
+}
+
+export const deleteBook = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  try {
+    const book = await prisma.book.delete({
+      where: {
+        id: Number(id),
+      },
+    });
+    res.send(book);
+  } catch (error) {
+    console.error(error);
+  }
 };
+
+
+
+
+
 
 // export const getBookByName = async (name: string) => {
 // console.log(name)
