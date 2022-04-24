@@ -25,6 +25,7 @@ export const getFavorite = async (req: Request, res: Response)=>{
     }else{
         res.send([])
     }  
+
     }catch(error){
         console.log(error)
     }
@@ -49,11 +50,11 @@ export const postFavorite = async( req: Request, res: Response)=>{
         }else{
             res.status(200).send("favorite already exists")
         }
-    }catch(error){
+    }
+    catch(error){
         console.log(error)
     }
 }
-
 
 
 export const removeFavorite = async( req: Request, res: Response)=>{
@@ -77,5 +78,4 @@ export const removeFavorite = async( req: Request, res: Response)=>{
         console.log(error)
     }
 }
-
 
