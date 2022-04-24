@@ -49,21 +49,22 @@ export const postUser = async (req: Request, res: Response) => {
 
 export const modifyUser = async (req: Request, res: Response) =>{
     try{
-        const { id , role } = req.body
+        const {role,id} = req.body
         const updateUser = await prisma.user.update({
-            where:{
-                id: Number(id)
+            where: {
+              id: Number(id),
             },
-            data:{
+            data: {
                 role: role
             }
-        })
-        updateUser? res.status(200).send(updateUser) : res.status(400).send('Not update')
-
-    }catch(error){
+          })
+          updateUser? res.status(200).send(updateUser) : res.status(400).send('Usuario no encontrado')
+    }
+    catch (error) {
         console.log(error)
     }
 }
+
 
 
 

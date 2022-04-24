@@ -51,7 +51,6 @@ export const postNewBook = async (req: Request, res: Response) =>{
   }
 }
 
-
 export const deleteBook = async (req: Request, res: Response) => {
   const { id } = req.params;
   try {
@@ -65,8 +64,6 @@ export const deleteBook = async (req: Request, res: Response) => {
     console.error(error);
   }
 };
-
-
 
 
 
