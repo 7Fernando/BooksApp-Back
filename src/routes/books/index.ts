@@ -10,6 +10,6 @@ router.get('/', getBooks);
 router.get('/:id', getBookById);
 router.delete('/:id', deleteBook);
 router.post('/', postNewBook )
-router.delete('/:id', deleteBook)
+
 
 export default router;
