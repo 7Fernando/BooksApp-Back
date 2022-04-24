@@ -59,10 +59,10 @@ export const getBookByName = async (name: string) => {
              }
            }
          }
-         
+
        }
      })
-
+     
      return newNewBook
   
  }   
