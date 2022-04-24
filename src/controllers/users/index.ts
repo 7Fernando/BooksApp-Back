@@ -17,6 +17,25 @@ export const getUser = async(req: Request, res: Response ) => {
     }
 }
 
+export const getUserById = async (req: Request, res: Response) => {
+    try {
+        const { id } = req.params;
+        const user = await prisma.user.findUnique({
+            where: {
+                id: Number(id)
+            },
+            include:{
+                favorite: true,
+            }
+        })
+        user ? res.status(200).send(user) : res.status(404).send({msg:"User not found"})
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+
+
 export const postUser = async (req: Request, res: Response) => { 
     try {
         const { name, mail, picture } = req.body;
@@ -74,29 +93,38 @@ export const modifyUser = async (req: Request, res: Response) =>{
     }
 }
 
-// export const getFavoriteBooks = async (userId: any) => {
-//     try {
-//       const bookId = await prisma.user.findUnique({
-//         where: {
-//           userId 
-//         },
-//         select: {
-//           favorite: true,
-//         },
-//       });
-  
-//       const favorite = bookId?.favorite.map((e) => e);
-  
-//       const allBooks = await prisma.book.findMany({
-//         where: {
-//           id: {
-//             in: favorite,
-//           },
-//         },
-//       });
-  
-//       return allBooks;
-//     } catch (error) {
-//       return null;
-//     }
-//   };
+export const modifyUser = async (req: Request, res: Response) =>{
+    try{
+        const { id , role } = req.body
+        const updateUser = await prisma.user.update({
+            where:{
+                id: Number(id)
+            },
+            data:{
+                role: role
+            }
+        })
+        updateUser? res.status(200).send(updateUser) : res.status(400).send('Not update')
+
+    }catch(error){
+        console.log(error)
+    }
+}
+
+
+
+
+
+export const deleteUser = async (req: Request, res: Response) =>{
+    try{
+        const id: any = req.params.id
+        const findUser = await prisma.user.delete({
+            where:{
+                id: Number(id)
+            }
+        })
+      findUser?   res.status(200).send('User Deleted') : res.status(400).send('No se pudo eliminar')
+    }catch(error){
+        console.log(error)
+    }
+}
