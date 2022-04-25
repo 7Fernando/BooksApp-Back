@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 import { jwtCheck } from "../../middleware/auth";
 
 export const getBooks = async (req: Request, res: Response) => {
-  console.log(jwtCheck);
+  //console.log(jwtCheck);
 
   const name: any = req.query.name || undefined;
   if (!req.query.name) {
@@ -24,6 +24,9 @@ export const getBooks = async (req: Request, res: Response) => {
     }
   }
 };
+
+
+
 
 export const getBookById = async (req: Request, res: Response) => {
   const { id } = req.params;
@@ -77,8 +80,6 @@ export const deleteBook = async (req: Request, res: Response) => {
     console.error(error);
   }
 };
-
-
 
 
 
