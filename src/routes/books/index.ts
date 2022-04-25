@@ -1,14 +1,14 @@
 import { Router } from "express";
 import { jwtCheck } from "../../middleware/auth";
-import { getBooks, getBookById ,postNewBook, deleteBook} from "../../controllers/books";
+import { getBooks, getBookById ,postNewBook, deleteBook, getBooksUser} from "../../controllers/books";
 const router = Router();
 
 router.get("/", jwtCheck, getBooks);
 router.get("/:id", getBookById);
+router.get("/user/admin",getBooksUser)
 router.post("/", postNewBook);
-router.get('/:id', getBookById);
-router.delete('/:id', deleteBook);
 router.post('/', postNewBook )
+router.delete('/:id', deleteBook);
 
 
 export default router;

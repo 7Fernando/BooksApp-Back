@@ -1,4 +1,8 @@
 var { expressjwt: jwt } = require("express-jwt");
+require('dotenv').config()
+
+
+
 
 
 export const jwtCheck = 
@@ -7,4 +11,4 @@ jwt({
   audience: 'secreto',
   issuer: 'https://dev-0h7i5plo.us.auth0.com/',
   algorithms: ['HS256']
-}).unless({ path: ["/"] });
+});
