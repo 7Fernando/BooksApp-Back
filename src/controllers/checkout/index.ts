@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
 import { analytics } from "googleapis/build/src/apis/analytics";
 
-// const {STRIPE_URL} = process.env
+ const {STRIPE_URL} = process.env
 
 const { CHECKOUT_KEY } = process.env;
 //console.log("keyDelEnv:", CHECKOUT_KEY);
@@ -21,8 +21,8 @@ export const postCheckout = async (req: Request, res: Response) => {
       { id: 2, name: "price_1KqMgDJx3UlXGWRu7GTGcMpr" },
       { id: 3, name: "price_1KqMgvJx3UlXGWRuLsHJvt2D" },
     ];
-    const plan = plans.find((p) => p.id === idPlan);
-
+    const choosenPlan = plans.find((p) => p.id === Number(idPlan));
+    //console.log(115, choosenPlan)
     const customer = await stripe.customers.create({
       payment_method: payment_method,
       email: email,
@@ -33,7 +33,7 @@ export const postCheckout = async (req: Request, res: Response) => {
 
     const subscription = await stripe.subscriptions.create({
       customer: customer.id,
-      items: [{ plan: plan?.name }],
+      items: [{ plan: choosenPlan?.name }],
       expand: ["latest_invoice.payment_intent"],
     });
 
@@ -42,11 +42,10 @@ export const postCheckout = async (req: Request, res: Response) => {
 
     res.json({
       hola: subscription,
-      client_secret: client_secret,
-      status: status,
     });
     //res.json({hola:subscription})
-  } catch (error) {
+  } catch (error:any) {
     console.error("ellll", error);
+    res.send(error.raw.message )
   }
 };
