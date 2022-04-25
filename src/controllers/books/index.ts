@@ -23,6 +23,9 @@ export const getBooks = async (req: Request, res: Response) => {
   }
 };
 
+
+
+
 export const getBookById = async (req: Request, res: Response) => {
   const { id } = req.params;
   try {
@@ -94,10 +97,6 @@ export const getBooksUser = async (req: Request, res: Response) => {
     }
   }
 };
-
-
-
-
 
 
 
