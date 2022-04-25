@@ -1,5 +1,5 @@
 var { expressjwt: jwt } = require("express-jwt");
-
+require('dotenv').config();
 
 export const jwtCheck = 
 jwt({
