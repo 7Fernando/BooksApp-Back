@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
-import { getBookByName,} from "../../helpers33/books";
+import { getBookByName} from "../../helpers33/books";
 const prisma = new PrismaClient();
 import { jwtCheck } from "../../middleware/auth";
 
@@ -25,5 +25,26 @@ export const getBooksUser = async (req: Request, res: Response) => {
       } else {
         res.status(404).send(["No book found with that name"]);
       }
+    }
+  };
+
+
+
+  export const getBookByIdAdmin = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    try {
+      const book = await prisma.book.findUnique({
+        where: {
+          id: Number(id),
+        },
+        include: {
+          author: true,
+          topic: true,
+          language: true,
+        },
+      });
+      res.send(book);
+    } catch (error) {
+      console.error(error);
     }
   };

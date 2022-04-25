@@ -1,12 +1,12 @@
-import { Router } from "express";
+// import { Router } from "express";
 
-import { jwtCheck } from "../../middleware/auth";
-import { getBooksUser} from "../../controllers/admin";
+// import { jwtCheck } from "../../middleware/auth";
+// import { getBooksUser} from "../../controllers/admin";
 
-const router = Router();
-
-
-router.get('/', getBooksUser)
+// const router = Router();
 
 
-export default router;
+// router.get('/admin', getBooksUser)
+
+
+// export default router;
