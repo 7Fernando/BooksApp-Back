@@ -6,6 +6,7 @@ import { Router } from "express";
 import language from './languege';
 import favorite  from "./favorite";
 import checkout  from "./checkout";
+import admin from "./admin"
 
 const router = Router();
 
@@ -16,6 +17,7 @@ router.use('/language', language)
 router.use('/users', user)
 router.use('/favorites', favorite)
 router.use('/sub', checkout)
+router.use('/admin', admin)
 
 
 
