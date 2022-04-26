@@ -38,6 +38,14 @@ model User {
   picture  String?
   role     Role       @default(USER)
   favorite Favorite[]
+  suscribe Suscription @default(NOT_SUBSCRIBED)
+}
+
+enum Suscription {
+  NOT_SUBSCRIBED
+  PLAN_A
+  PLAN_B
+  PLAN_C
 }
 
 enum Role {
