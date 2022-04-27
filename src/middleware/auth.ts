@@ -1,7 +1,5 @@
 var { expressjwt: jwt } = require("express-jwt");
-<<<<<<< HEAD
-require('dotenv').config();
-=======
+
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 import { Request, Response, NextFunction } from "express";
@@ -13,7 +11,7 @@ export const jwtCheck = jwt({
   issuer: "https://dev-0h7i5plo.us.auth0.com/",
   algorithms: ["HS256"],
 });
->>>>>>> ffbbd9a27ff60cbf21d0a181d28df73e9fcbafd0
+
 
 export const adminCheck = async (req: Request,res: Response,next: NextFunction) => {
   const { user } = req.headers;
