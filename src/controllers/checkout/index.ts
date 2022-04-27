@@ -61,13 +61,13 @@ export const updateSubscription = async (req: Request, res: Response) => {
       res.status(404).json({ msg: "User not found" });
     } else {
       const plans: any =  [
-        { id: 1, name: "price_1KqMdzJx3UlXGWRuxLcF5HWs", title:"PLAN_A" },
-        { id: 2, name: "price_1KqMgDJx3UlXGWRu7GTGcMpr", title:"PLAN_B" },
-        { id: 3, name: "price_1KqMgvJx3UlXGWRuLsHJvt2D", title:"PLAN_C" },
+        { id: 1, name: "price_1KqMdzJx3UlXGWRuxLcF5HWs", title:"HOBBY" },
+        { id: 2, name: "price_1KqMgDJx3UlXGWRu7GTGcMpr", title:"GROWTH" },
+        { id: 3, name: "price_1KqMgvJx3UlXGWRuLsHJvt2D", title:"LOVER" },
       ];
       const updateUser = await prisma.user.update({
         where: { mail: email },
-        data: { suscribe: plans[idPlan-1].title },
+        data: { plan: plans[idPlan-1].title },
 
 
       });

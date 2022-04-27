@@ -70,12 +70,14 @@ export const getUserByMail = async (req: Request, res: Response) => {
 
 export const modifyUser = async (req: Request, res: Response) => {
   try {
-    const { role, id } = req.body;
+    const { role, id, picture, name } = req.body;
     const updateUser = await prisma.user.update({
       where: {
         id: Number(id),
       },
       data: {
+        picture: picture,
+        name: name,
         role: role,
       },
     });
@@ -126,3 +128,4 @@ export const updateSub = async (req: Request, res: Response) => {
     return res.send("User not update")
   }
 };
+
