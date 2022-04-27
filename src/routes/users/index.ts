@@ -14,7 +14,7 @@ router.get('/profile/:mail',getUserByMail)
 router.delete('/admin/:id', deleteUser)
 router.put('/', modifyUser)
 router.put('/updateSub', checkSub,updateSub)
-//router.get("/", adminCheck, getUser);
+router.get("/", adminCheck, getUser);
 router.post("/", postUser);
 
 

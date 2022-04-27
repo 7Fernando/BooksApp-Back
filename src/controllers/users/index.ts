@@ -114,7 +114,7 @@ export const updateSub = async (req: Request, res: Response) => {
         mail: userMail,
       },
       data: {
-        //subId: idSub,
+        subId: idSub,  
       },
     });
 
