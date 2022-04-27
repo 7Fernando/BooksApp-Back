@@ -4,9 +4,7 @@ import { getBookByName, newBook } from "../../helpers33/books";
 const prisma = new PrismaClient();
 import { jwtCheck } from "../../middleware/auth";
 
-export const getBooks = async (req: Request, res: Response) => {
-  //console.log(jwtCheck);
-
+export const getBooks = async (req: Request, res: Response) => {  
   const name: any = req.query.name || undefined;
   if (!req.query.name) {
     const books = await prisma.book.findMany();
@@ -81,18 +79,24 @@ export const deleteBook = async (req: Request, res: Response) => {
   }
 };
 
+export const getBooksUser = async (req: Request, res: Response) => {
+  const name: any = req.query.name || undefined;
+  if (!req.query.name) {
+    const books = await prisma.book.findMany();
+    try {
+      res.send(books);
+    } catch (error) {
+      console.error(error);
+    }
+  } else {
+    const booksByName: any = await getBookByName(name);
+    if (booksByName.length) {
+      res.status(200).send(booksByName);
+    } else {
+      res.status(404).send(booksByName);
+    }
+  }
+};
 
 
 
-// export const getBookByName = async (name: string) => {
-// console.log(name)
-//   try {
-//     let bookNameFound = await prisma.book.findMany({
-//       where: { title: { contains: name, mode: "insensitive" } },
-//     });
-
-//     return(bookNameFound);
-//   } catch (error) {
-//     console.error(error);
-//   }
-// };
