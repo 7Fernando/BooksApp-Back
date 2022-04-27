@@ -36,6 +36,7 @@ model User {
   name     String
   mail     String     @unique
   picture  String?
+  subId    String?    @unique
   role     Role       @default(USER)
   favorite Favorite[]
   suscribe Suscription @default(NOT_SUBSCRIBED)
