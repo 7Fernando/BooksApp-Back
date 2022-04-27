@@ -12,13 +12,13 @@ import { Favorite, PrismaClient } from "@prisma/client";
 const router = Router();
 
 
-router.get("/", adminCheck, getUser)
+router.get("/",  getUser)
 router.post('/', postUser)
 router.get('/:id',getUserById)
 router.put('/updateSub', checkSub,updateSub)
-router.put('/', modifyUser)
-router.delete('/admin/:id', deleteUser)
-router.post('/admin/mail', sendNewsletter)
+router.put('/', modifyUser,  adminCheck)
+router.delete('/admin/:id',  adminCheck,  deleteUser)
+router.post('/admin/mail',  adminCheck, sendNewsletter)
 
 
 
