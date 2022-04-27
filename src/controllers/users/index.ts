@@ -17,6 +17,8 @@ export const getUser = async(req: Request, res: Response ) => {
     }
 }
 
+
+
 export const getUserById = async (req: Request, res: Response) => {
     try {
         const { id } = req.params;
@@ -68,8 +70,6 @@ export const modifyUser = async (req: Request, res: Response) =>{
 
 
 
-
-
 export const deleteUser = async (req: Request, res: Response) =>{
     try{
         const id: any = req.params.id
@@ -83,3 +83,29 @@ export const deleteUser = async (req: Request, res: Response) =>{
         console.log(error)
     }
 }
+
+export const updateSub = async (req: Request, res: Response) => {
+    try {
+      const { idSub, userMail } = req.body;
+      console.log(120,idSub, userMail)
+      //console.log( 122,req.body)
+      const updateUser = await prisma.user.update({
+        where: {
+          mail: userMail,
+        },
+        data: {
+          subId: idSub,
+        },
+      });
+  
+   
+         res.status(200).send("User update")
+        
+    } catch (error) {
+      console.log(error);
+      return res.send("User not update")
+    }
+  };
+  
+
+

@@ -36,6 +36,7 @@ model User {
   name     String
   mail     String     @unique
   picture  String?
+  subId    String?    @unique
   role     Role       @default(USER)
   favorite Favorite[]
 }
@@ -51,7 +52,7 @@ model Favorite {
   user      User     @relation(fields: [userId], references: [id])
   userId    Int
   book      Book     @relation(fields: [bookId], references: [id])
-  bookId    Int      
+  bookId    Int
 }
 
 model Topic {

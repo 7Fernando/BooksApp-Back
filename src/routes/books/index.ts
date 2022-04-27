@@ -3,10 +3,12 @@ import { Router } from "express";
 import { jwtCheck } from "../../middleware/auth";
 import { getBooks, getBookById ,postNewBook, deleteBook} from "../../controllers/books";
 import { getBooksUser , getBookByIdAdmin} from "../../controllers/admin";
+import { checkSub } from "../../middleware/checkout";
+import { adminCheck } from "../../middleware/auth";
 
 const router = Router();
 
-router.get('/', jwtCheck ,getBooks)
+router.get('/', checkSub  ,getBooks)
 router.post("/", postNewBook);
 router.get('/:id', getBookById);
 
