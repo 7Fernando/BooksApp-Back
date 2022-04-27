@@ -15,7 +15,7 @@ export const postCheckout = async (req: Request, res: Response) => {
   try {
          //email, payment_method and plan from front
     const { email, payment_method, idPlan } = req.body;
-
+//console.log(111,req.headers)
     const plans = [
       { id: 1, name: "price_1KqMdzJx3UlXGWRuxLcF5HWs" },
       { id: 2, name: "price_1KqMgDJx3UlXGWRu7GTGcMpr" },
