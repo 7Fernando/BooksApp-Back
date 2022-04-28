@@ -30,6 +30,7 @@ export const newUser = async (data: any) => {
 }
 
 
+
 export const saveFavourite = async (userId: any, bookId: any) => {
     try {
       const user: any = await prisma.user.findUnique({
@@ -69,3 +70,7 @@ export const saveFavourite = async (userId: any, bookId: any) => {
       return null;
     }
   };
+
+
+
+
