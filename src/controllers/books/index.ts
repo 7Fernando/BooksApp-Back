@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
 import { getBookByName, newBook } from "../../helpers33/books";
 const prisma = new PrismaClient();
-import { jwtCheck } from "../../middleware/auth";
 
 export const getBooks = async (req: Request, res: Response) => {  
   const name: any = req.query.name || undefined;
