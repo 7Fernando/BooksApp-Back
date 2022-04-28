@@ -19,6 +19,7 @@ router.get("/", adminCheck, getUser);
 router.post("/", postUser);
 router.delete("/admin/:id", deleteUser);
 router.put('/',adminCheck,modifyUser)
+router.put('/modify', modifyUser)
 router.delete('/admin/:id',  adminCheck,  deleteUser)
 router.post('/admin/mail',  adminCheck, sendNewsletter)
 
