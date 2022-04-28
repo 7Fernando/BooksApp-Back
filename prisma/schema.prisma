@@ -39,6 +39,14 @@ model User {
   subId    String?    @unique
   role     Role       @default(USER)
   favorite Favorite[]
+  plan Suscription @default(NOT_SUBSCRIBED)
+}
+
+enum Suscription {
+  NOT_SUBSCRIBED
+  HOBBY
+  GROWTH
+  LOVER
 }
 
 enum Role {
