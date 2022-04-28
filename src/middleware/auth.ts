@@ -9,7 +9,9 @@ export const jwtCheck = jwt({
   audience: "secreto",
   issuer: "https://dev-0h7i5plo.us.auth0.com/",
   algorithms: ["HS256"],
-}).unless({ path: ["/users/admin/mail"] });
+}).unless({ path: ["http://localhost:3001/api/users/updateSub","/users/admin/mail"] });
+
+
 
 export const adminCheck = async (req: Request,res: Response,next: NextFunction) => {
   //console.log('heders', req.headers)
