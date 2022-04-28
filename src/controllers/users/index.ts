@@ -18,6 +18,8 @@ export const getUser = async (req: Request, res: Response) => {
   }
 };
 
+
+
 export const getUserById = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
@@ -49,60 +51,64 @@ export const postUser = async (req: Request, res: Response) => {
   }
 };
 
-export const modifyUser = async (req: Request, res: Response) => {
-  try {
-    const { role, id } = req.body;
-    const updateUser = await prisma.user.update({
-      where: {
-        id: Number(id),
-      },
-      data: {
-        role: role,
-      },
-    });
-    updateUser
-      ? res.status(200).send(updateUser)
-      : res.status(400).send("Usuario no encontrado");
-  } catch (error) {
-    console.log(error);
-  }
-};
 
-export const deleteUser = async (req: Request, res: Response) => {
-  try {
-    const id: any = req.params.id;
-    const findUser = await prisma.user.delete({
-      where: {
-        id: Number(id),
-      },
-    });
-    findUser
-      ? res.status(200).send("User Deleted")
-      : res.status(400).send("No se pudo eliminar");
-  } catch (error) {
-    console.log(error);
-  }
-};
+export const modifyUser = async (req: Request, res: Response) =>{
+    try{
+        const {role,id} = req.body
+        const updateUser = await prisma.user.update({
+            where: {
+              id: Number(id),
+            },
+            data: {
+                role: role
+            }
+          })
+          updateUser? res.status(200).send(updateUser) : res.status(400).send('Usuario no encontrado')
+    }
+    catch (error) {
+        console.log(error)
+    }
+}
+
+
+
+
+export const deleteUser = async (req: Request, res: Response) =>{
+    try{
+        const id: any = req.params.id
+        const findUser = await prisma.user.delete({
+            where:{
+                id: Number(id)
+            }
+        })
+      findUser?   res.status(200).send('User Deleted') : res.status(400).send('No se pudo eliminar')
+    }catch(error){
+        console.log(error)
+    }
+}
 
 export const updateSub = async (req: Request, res: Response) => {
-  try {
-    const { idSub, userMail } = req.body;
-    console.log(120,idSub, userMail)
-    //console.log( 122,req.body)
-    const updateUser = await prisma.user.update({
-      where: {
-        mail: userMail,
-      },
-      data: {
-        subId: idSub,
-      },
-    });
+    try {
+      const { idSub, userMail } = req.body;
+      console.log(120,idSub, userMail)
+      //console.log( 122,req.body)
+      const updateUser = await prisma.user.update({
+        where: {
+          mail: userMail,
+        },
+        data: {
+          subId: idSub,
+        },
+      });
+  
+   
+         res.status(200).send("User update")
+        
+    } catch (error) {
+      console.log(error);
+      return res.send("User not update")
+    }
+  };
+  
 
- 
-       res.status(200).send("User update")
-      
-  } catch (error) {
-    console.log(error);
-    return res.send("User not update")
-  }
-};
+
