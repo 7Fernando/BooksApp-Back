@@ -49,6 +49,15 @@ export const postCheckout = async (req: Request, res: Response) => {
     res.send(error.raw.message )
   }
 };
+
+
+export const getConfirmation = (req: Request, res: Response) =>{
+  try {
+    res.send("Already paid")
+  } catch (error) {
+    res.send({"Error in getConfirmation": error})
+  }
+
 export const updateSubscription = async (req: Request, res: Response) => {
 //
   try {
@@ -77,5 +86,5 @@ export const updateSubscription = async (req: Request, res: Response) => {
     console.error(error);
     res.status(500).json({ msg: "Something went wrong" });
   }
-  
+
 }

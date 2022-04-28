@@ -16,7 +16,7 @@ export const jwtCheck = jwt({
 
 
 export const adminCheck = async (req: Request,res: Response,next: NextFunction) => {
-  //console.log('heders', req.headers)
+
   const { user } = req.headers;
   let findUser = await prisma.user.findUnique({
     where: { mail: String(user) },
