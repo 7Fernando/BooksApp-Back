@@ -9,7 +9,7 @@ import checkout from "./checkout";
 import { jwtCheck } from "../middleware/auth";
 
 const router = Router();
-router.use(jwtCheck); // comentar para no usar el token 
+//router.use(jwtCheck); // comentar para no usar el token 
 
 router.use("/books", books);
 router.use("/author", author);
