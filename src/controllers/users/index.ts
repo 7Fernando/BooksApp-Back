@@ -51,25 +51,44 @@ export const postUser = async (req: Request, res: Response) => {
   }
 };
 
-
-export const modifyUser = async (req: Request, res: Response) =>{
-    try{
-        const {role,id} = req.body
-        const updateUser = await prisma.user.update({
+export const getUserByMail = async (req: Request, res: Response) => {
+    try {
+        const { mail } = req.params;
+        const user = await prisma.user.findUnique({
             where: {
-              id: Number(id),
+                mail: mail
             },
-            data: {
-                role: role
+            include:{
+                favorite: true,
             }
-          })
-          updateUser? res.status(200).send(updateUser) : res.status(400).send('Usuario no encontrado')
-    }
-    catch (error) {
-        console.log(error)
+        })
+        user ? res.status(200).send(user) : res.status(404).send({msg:"User not found"})
+    } catch (error) {
+        console.error(error)
     }
 }
 
+
+export const modifyUser = async (req: Request, res: Response) => {
+  try {
+    const { role, id, picture, name } = req.body;
+    const updateUser = await prisma.user.update({
+      where: {
+        id: Number(id),
+      },
+      data: {
+        picture: picture,
+        name: name,
+        role: role,
+      },
+    });
+    updateUser
+      ? res.status(200).send(updateUser)
+      : res.status(400).send("Usuario no encontrado");
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 
 
@@ -110,5 +129,6 @@ export const updateSub = async (req: Request, res: Response) => {
     }
   };
   
+
 
 
