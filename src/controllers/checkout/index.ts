@@ -48,8 +48,7 @@ export const postCheckout = async (req: Request, res: Response) => {
     console.error("ellll", error);
     res.send(error.raw.message )
   }
-};
-
+}
 
 export const getConfirmation = (req: Request, res: Response) =>{
   try {
@@ -57,6 +56,7 @@ export const getConfirmation = (req: Request, res: Response) =>{
   } catch (error) {
     res.send({"Error in getConfirmation": error})
   }
+}
 
 export const updateSubscription = async (req: Request, res: Response) => {
 //
@@ -76,13 +76,17 @@ export const updateSubscription = async (req: Request, res: Response) => {
       ];
       const updateUser = await prisma.user.update({
         where: { mail: email },
-        data: { plan: plans[idPlan-1].title },
+        data: { plan: plans[idPlan-1]?.title },
 
 
       });
       res.status(200).json(updateUser);
   }
-  } catch (error) {
+
+  } 
+
+
+  catch (error) {
     console.error(error);
     res.status(500).json({ msg: "Something went wrong" });
   }
