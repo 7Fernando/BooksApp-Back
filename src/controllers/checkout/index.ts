@@ -58,8 +58,8 @@ export const getConfirmation = (req: Request, res: Response) =>{
     res.send({"Error in getConfirmation": error})
   }
 
+}
 export const updateSubscription = async (req: Request, res: Response) => {
-//
   try {
     
     const {email, idPlan} = req.body;
