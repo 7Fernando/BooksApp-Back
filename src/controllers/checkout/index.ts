@@ -57,6 +57,7 @@ export const getConfirmation = (req: Request, res: Response) =>{
   } catch (error) {
     res.send({"Error in getConfirmation": error})
   }
+}
 
 export const updateSubscription = async (req: Request, res: Response) => {
 //

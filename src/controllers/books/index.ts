@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 export const getBooks = async (req: Request, res: Response) => {  
   const name: any = req.query.name || undefined;
   if (!req.query.name) {
-    const books = await prisma.book.findMany();
+    const books = await prisma.book.findMany({ include: { topic: true }});
     try {
       res.send(books);
     } catch (error) {
