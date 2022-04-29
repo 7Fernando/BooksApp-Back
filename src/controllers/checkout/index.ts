@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
 import { analytics } from "googleapis/build/src/apis/analytics";
 
- const {STRIPE_URL} = process.env
+const {STRIPE_URL} = process.env
 const prisma = new PrismaClient();
 const { CHECKOUT_KEY } = process.env;
 //console.log("keyDelEnv:", CHECKOUT_KEY);
