@@ -38,17 +38,26 @@ let info = await transporter.sendMail({
 
 
 export const sendNewsletter = async (req: Request ,res: Response) => {
-  const {arrayMail , message} = req.body
+  const {mail , message} = req.body
 
   
- 
+ console.log(req.body)
   try{
-    arrayMail.map(async function(e: any){
-
+    mail.map(async function(e: any){
+      
       let contentHTML =
       `<h1>NewsLetter BOOKFLIX </h1>
-        <p>Hello, ${e}, this is the new on Bootflix </p>
+        <p>Hello, ${e}</p>
+        
+        <h2>This is the new on Bootflix 📖 </h2> 
         <p>${message}</p>
+        <br>
+
+
+
+        <span>Enjoy your Read</span>
+
+
       `
 
       console.log(e)
@@ -83,7 +92,7 @@ export const sendNewsletter = async (req: Request ,res: Response) => {
       subject: "Newsletter Bookflix! 📖",
       html: contentHTML,
     })
-    console.log('heders', req.headers)
+    
     res.status(200).send(send)
 
     }})
