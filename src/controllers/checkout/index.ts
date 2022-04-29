@@ -3,6 +3,8 @@ import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
 import { analytics } from "googleapis/build/src/apis/analytics";
 
+import { saveData } from "../../helpers33/checkout";
+
 const {STRIPE_URL} = process.env
 const prisma = new PrismaClient();
 const { CHECKOUT_KEY } = process.env;
@@ -37,6 +39,12 @@ export const postCheckout = async (req: Request, res: Response) => {
       expand: ["latest_invoice.payment_intent"],
     });
 
+    console.log(subscription)
+
+    if(subscription.id){
+      console.log(24, email)
+      saveData(subscription, email)
+    }
     const status = subscription["latest_invoice"]; //['payment_intent']//['status'] || "something failed" //['payment_intent']['status'];
     const client_secret = subscription["latest_invoice"]; //['payment_intent']['client_secret'];
     
@@ -57,6 +65,21 @@ export const getConfirmation = (req: Request, res: Response) =>{
     res.send({"Error in getConfirmation": error})
   }
 }
+
+// export const postSubInfo = (req: Request, res: Response)=>{
+//   try {
+
+
+
+//   } catch (err){
+//     console.error(err)
+//   }
+
+
+
+// }
+
+
 
 
 export const updateSubscription = async (req: Request, res: Response) => {
