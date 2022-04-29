@@ -58,7 +58,7 @@ export const getConfirmation = (req: Request, res: Response) =>{
   }
 }
 
-}
+
 export const updateSubscription = async (req: Request, res: Response) => {
   try {
     
