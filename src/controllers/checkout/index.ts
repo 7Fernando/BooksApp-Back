@@ -56,7 +56,7 @@ export const getConfirmation = (req: Request, res: Response) =>{
     res.send("Already paid")
   } catch (error) {
     res.send({"Error in getConfirmation": error})
-  }
+  }}
 
 export const updateSubscription = async (req: Request, res: Response) => {
 //
@@ -87,4 +87,4 @@ export const updateSubscription = async (req: Request, res: Response) => {
     res.status(500).json({ msg: "Something went wrong" });
   }
 
-}
+};
