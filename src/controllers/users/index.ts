@@ -60,6 +60,7 @@ export const getUserByMail = async (req: Request, res: Response) => {
             },
             include:{
                 favorite: true,
+                subInfo: true
             }
         })
         user ? res.status(200).send(user) : res.status(404).send({msg:"User not found"})
