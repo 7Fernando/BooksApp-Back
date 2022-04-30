@@ -3,7 +3,9 @@ import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
 import { analytics } from "googleapis/build/src/apis/analytics";
 
- const {STRIPE_URL} = process.env
+import { saveData } from "../../helpers33/checkout";
+
+const {STRIPE_URL} = process.env
 const prisma = new PrismaClient();
 const { CHECKOUT_KEY } = process.env;
 //console.log("keyDelEnv:", CHECKOUT_KEY);
@@ -37,6 +39,11 @@ export const postCheckout = async (req: Request, res: Response) => {
       expand: ["latest_invoice.payment_intent"],
     });
 
+
+    if(subscription.id){
+      console.log(24, email)
+      saveData(subscription, email)
+    }
     const status = subscription["latest_invoice"]; //['payment_intent']//['status'] || "something failed" //['payment_intent']['status'];
     const client_secret = subscription["latest_invoice"]; //['payment_intent']['client_secret'];
     
@@ -57,8 +64,23 @@ export const getConfirmation = (req: Request, res: Response) =>{
     res.send({"Error in getConfirmation": error})
   }}
 
+// export const postSubInfo = (req: Request, res: Response)=>{
+//   try {
+
+
+
+//   } catch (err){
+//     console.error(err)
+//   }
+
+
+
+// }
+
+
+
+
 export const updateSubscription = async (req: Request, res: Response) => {
-//
   try {
     
     const {email, idPlan} = req.body;
@@ -90,4 +112,4 @@ export const updateSubscription = async (req: Request, res: Response) => {
     res.status(500).json({ msg: "Something went wrong" });
   }
 
-};
+}
