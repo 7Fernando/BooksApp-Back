@@ -3,9 +3,9 @@ import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
 import { analytics } from "googleapis/build/src/apis/analytics";
 
-import { saveData } from "../../helpers33/checkout";
+import { saveData, updateData } from "../../helpers33/checkout";
 
-const {STRIPE_URL} = process.env
+const { STRIPE_URL } = process.env;
 const prisma = new PrismaClient();
 const { CHECKOUT_KEY } = process.env;
 //console.log("keyDelEnv:", CHECKOUT_KEY);
@@ -15,9 +15,9 @@ const stripe = new Stripe(CHECKOUT_KEY || "", {
 
 export const postCheckout = async (req: Request, res: Response) => {
   try {
-         //email, payment_method and plan from front
+    //email, payment_method and plan from front
     const { email, payment_method, idPlan } = req.body;
-//console.log(111,req.headers)
+    //console.log(111,req.headers)
     const plans = [
       { id: 1, name: "price_1KqMdzJx3UlXGWRuxLcF5HWs" },
       { id: 2, name: "price_1KqMgDJx3UlXGWRu7GTGcMpr" },
@@ -39,78 +39,101 @@ export const postCheckout = async (req: Request, res: Response) => {
       expand: ["latest_invoice.payment_intent"],
     });
 
-
-    if(subscription.id){
-      console.log(24, email)
-      saveData(subscription, email)
+    if (subscription.id) {
+      console.log(24, email);
+      saveData(subscription, email);
     }
     const status = subscription["latest_invoice"]; //['payment_intent']//['status'] || "something failed" //['payment_intent']['status'];
     const client_secret = subscription["latest_invoice"]; //['payment_intent']['client_secret'];
-    
+
     res.json({
       hola: subscription,
     });
     //res.json({hola:subscription})
-  } catch (error:any) {
+  } catch (error: any) {
     console.error("ellll", error);
-    res.send(error.raw.message )
+    res.send(error.raw.message);
   }
-}
+};
 
-export const getConfirmation = (req: Request, res: Response) =>{
+export const getConfirmation = (req: Request, res: Response) => {
   try {
-    res.send("Already paid")
+    res.send("Already paid");
   } catch (error) {
-    res.send({"Error in getConfirmation": error})
+    res.send({ "Error in getConfirmation": error });
   }
-}
-
-// export const postSubInfo = (req: Request, res: Response)=>{
-//   try {
-
-
-
-//   } catch (err){
-//     console.error(err)
-//   }
-
-
-
-// }
-
-
-
+};
 
 export const updateSubscription = async (req: Request, res: Response) => {
   try {
-    
-    const {email, idPlan} = req.body;
+    const { email, idPlan } = req.body;
     const user = await prisma.user.findUnique({
       where: { mail: email },
     });
     if (!user) {
       res.status(404).json({ msg: "User not found" });
     } else {
-      const plans: any =  [
-        { id: 1, name: "price_1KqMdzJx3UlXGWRuxLcF5HWs", title:"HOBBY" },
-        { id: 2, name: "price_1KqMgDJx3UlXGWRu7GTGcMpr", title:"GROWTH" },
-        { id: 3, name: "price_1KqMgvJx3UlXGWRuLsHJvt2D", title:"LOVER" },
+      const plans: any = [
+        { id: 1, name: "price_1KqMdzJx3UlXGWRuxLcF5HWs", title: "HOBBY" },
+        { id: 2, name: "price_1KqMgDJx3UlXGWRu7GTGcMpr", title: "GROWTH" },
+        { id: 3, name: "price_1KqMgvJx3UlXGWRuLsHJvt2D", title: "LOVER" },
       ];
       const updateUser = await prisma.user.update({
         where: { mail: email },
-        data: { plan: plans[idPlan-1]?.title },
-
-
+        data: { plan: plans[idPlan - 1]?.title },
       });
       res.status(200).json(updateUser);
-  }
-
-  } 
-
-
-  catch (error) {
+    }
+  } catch (error) {
     console.error(error);
     res.status(500).json({ msg: "Something went wrong" });
   }
+};
 
-}
+export const changeSub = async (req: Request, res: Response) => {
+  try {
+    const { usermail, idPlanPrice } = req.body;
+    console.log(99, usermail);
+
+    const planGrowth = "price_1KqMgDJx3UlXGWRu7GTGcMpr";
+    const planLover = "price_1KqMgvJx3UlXGWRuLsHJvt2D";
+
+    const planPrice = Number(idPlanPrice) === 2 ? planGrowth : planLover;
+
+    const user = await prisma.user.findUnique({
+      where: {
+        mail: String(usermail),
+      },
+    });
+
+    console.log(101, user?.subId);
+    const subscription = user?.subId
+      ? await stripe.subscriptions.retrieve(user?.subId)
+      : "Something went wrong in change Sub";
+    console.log(100, subscription);
+
+    if (subscription !== "Something went wrong in change Sub" && user?.subId) {
+      const update = await stripe.subscriptions.update(user?.subId, {
+        cancel_at_period_end: false,
+        proration_behavior: "create_prorations",
+        items: [
+          {
+            id: subscription?.items?.data[0].id,
+            price: planPrice,
+          },
+        ],//
+      });
+      console.log(120, update);
+      if (update.id) {
+        
+        updateData(update, usermail);
+      }
+      res.send({ "GoodChange": update });
+    } else {
+      res.send("Something went wrong in change Sub");
+    }
+  } catch (error) {
+    console.error(10, error);
+    res.send({ failInChange: error });
+  }
+};
