@@ -3,7 +3,7 @@ import { PrismaClient } from "@prisma/client";
 import { getBookByName, newBook } from "../../helpers33/books";
 const prisma = new PrismaClient();
 
-export const getBooks = async (req: Request, res: Response) => {  
+export const getBooks = async (req: Request, res: Response) => {
   const name: any = req.query.name || undefined;
   if (!req.query.name) {
     const books = await prisma.book.findMany();
@@ -21,9 +21,6 @@ export const getBooks = async (req: Request, res: Response) => {
     }
   }
 };
-
-
-
 
 export const getBookById = async (req: Request, res: Response) => {
   const { id } = req.params;
@@ -61,8 +58,7 @@ export const postNewBook = async (req: Request, res: Response) => {
   } catch (error) {
     console.log(error);
   }
-
-}
+};
 
 export const deleteBook = async (req: Request, res: Response) => {
   const { id } = req.params;
@@ -97,5 +93,50 @@ export const getBooksUser = async (req: Request, res: Response) => {
   }
 };
 
+export const incrementLikeBook = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.body;
+    if (id) {
+      await prisma.book.update({
+        where: {
+          id: id,
+        },
+        data: {
+          like: {
+            increment: 1,
+          },
+        },
+      });
+      res.status(200).send({ msg: "incremet like successfully" });
+    } else {
+      res.status(400).send({ msg: "incremet like rejected" });
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const decrementLikeBook = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.body;
+    if (id) {
+      await prisma.book.update({
+        where: {
+          id: id,
+        },
+        data: {
+          like: {
+            decrement: 1,
+          },
+        },
+      });
+      res.status(200).send({ msg: "decrement like successfully" });
+    } else {
+      res.status(400).send({ msg: "decrement like rejected" });
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 
