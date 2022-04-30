@@ -39,7 +39,6 @@ export const postCheckout = async (req: Request, res: Response) => {
       expand: ["latest_invoice.payment_intent"],
     });
 
-    console.log(subscription)
 
     if(subscription.id){
       console.log(24, email)

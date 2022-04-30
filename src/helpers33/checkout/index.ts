@@ -6,7 +6,6 @@ export const saveData = async (subscription: any, email: any) => {
     try{
 //  var myDate = new Date( 1651266930 *1000);
 // console.log(myDate.toGMTString()+myDate.toLocaleString());
-        console.log(25,email)
         const user = await prisma.user.findUnique({
             where: {
                 mail: email
