@@ -6,7 +6,7 @@ import { Response, Request, NextFunction } from "express";
 const prisma = new PrismaClient();
  
 export const checkSub = async (req:Request,res:Response, next:NextFunction) =>{
-    const { usermail } = req.headers;
+    const { usermail } = req.headers; 
     //console.log(77,req.headers)
     const user = await prisma.user.findUnique({
         where: {
