@@ -45,7 +45,7 @@ export const postUser = async (req: Request, res: Response) => {
     const newNewUser = await newUser({ name, mail, picture }); //CORREGIR EL TIPO DE DATO
     newNewUser
       ? res.status(201).send(newNewUser)
-      : res.status(400).send("User not created");
+      : res.status(200).send("User not created");
   } catch (error) {
     console.error(error);
   }

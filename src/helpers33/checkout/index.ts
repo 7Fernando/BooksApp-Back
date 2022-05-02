@@ -4,13 +4,12 @@ const prisma = new PrismaClient();
 
 export const saveData = async (subscription: any, email: any) => {
   try {
-  
     const user = await prisma.user.findUnique({
       where: {
         mail: email,
       },
     });
-    
+
     const userDate = await prisma.subInfo.create({
       data: {
         currentStart: subscription.current_period_start,
@@ -27,13 +26,12 @@ export const saveData = async (subscription: any, email: any) => {
 
 export const updateData = async (subscription: any, email: any) => {
   try {
-   
     const user = await prisma.user.findUnique({
       where: {
         mail: email,
       },
     });
-    
+
     const userDate = await prisma.subInfo.create({
       data: {
         currentStart: subscription.current_period_start,
@@ -43,7 +41,22 @@ export const updateData = async (subscription: any, email: any) => {
         userId: Number(user?.id),
       },
     });
-    console.log(115,userDate)
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const deleteUser = async (email: any) => {
+  try {
+    const notSub: any = "NOT_SUBSCRIBED";
+    const updateSubUser = await prisma.user.update({
+      where: {
+        mail: email,
+      },
+      data: { plan: notSub, subId: null },
+    });
+    console.log(111, updateSubUser);
+    return updateSubUser;
   } catch (err) {
     console.error(err);
   }
