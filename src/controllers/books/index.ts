@@ -99,7 +99,7 @@ export const incrementLikeBook = async (req: Request, res: Response) => {
     if (id) {
       await prisma.book.update({
         where: {
-          id: id,
+          id: Number(id),
         },
         data: {
           like: {

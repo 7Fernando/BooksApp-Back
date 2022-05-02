@@ -53,14 +53,10 @@ export const sendNewsletter = async (req: Request ,res: Response) => {
         <p>${message}</p>
         <br>
 
-
-
         <span>Enjoy your Read</span>
 
 
       `
-
-      console.log(e)
 
       const findMails = await prisma.user.findMany({
         where: {
