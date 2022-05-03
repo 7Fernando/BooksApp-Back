@@ -57,11 +57,17 @@ export const getConfirmation = (req: Request, res: Response) => {
   try {
     res.send("Already paid");
   } catch (error) {
+<<<<<<< HEAD
+    res.send({ "Error in getConfirmation": error });
+  }
+};
+=======
 
     res.send({ "Error in getConfirmation": error });
   }
 };
 
+>>>>>>> 3f42e26efae75ca75af01495db416f281af907b5
 
 export const updateSubscription = async (req: Request, res: Response) => {
   try {
