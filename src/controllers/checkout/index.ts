@@ -2,13 +2,10 @@ import Stripe from "stripe";
 import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
 import { analytics } from "googleapis/build/src/apis/analytics";
+import { saveData, updateData, deleteUser } from "../../helpers33/checkout";
 
-import { saveData, updateData } from "../../helpers33/checkout";
-
-const { STRIPE_URL } = process.env;
 const prisma = new PrismaClient();
 const { CHECKOUT_KEY } = process.env;
-//console.log("keyDelEnv:", CHECKOUT_KEY);
 const stripe = new Stripe(CHECKOUT_KEY || "", {
   apiVersion: "2020-08-27",
 });
@@ -60,9 +57,17 @@ export const getConfirmation = (req: Request, res: Response) => {
   try {
     res.send("Already paid");
   } catch (error) {
+<<<<<<< HEAD
     res.send({ "Error in getConfirmation": error });
   }
 };
+=======
+
+    res.send({ "Error in getConfirmation": error });
+  }
+};
+
+>>>>>>> 3f42e26efae75ca75af01495db416f281af907b5
 
 export const updateSubscription = async (req: Request, res: Response) => {
   try {
@@ -93,7 +98,6 @@ export const updateSubscription = async (req: Request, res: Response) => {
 export const changeSub = async (req: Request, res: Response) => {
   try {
     const { usermail, idPlanPrice } = req.body;
-    console.log(99, usermail);
 
     const planGrowth = "price_1KqMgDJx3UlXGWRu7GTGcMpr";
     const planLover = "price_1KqMgvJx3UlXGWRuLsHJvt2D";
@@ -106,11 +110,9 @@ export const changeSub = async (req: Request, res: Response) => {
       },
     });
 
-    console.log(101, user?.subId);
     const subscription = user?.subId
       ? await stripe.subscriptions.retrieve(user?.subId)
       : "Something went wrong in change Sub";
-    console.log(100, subscription);
 
     if (subscription !== "Something went wrong in change Sub" && user?.subId) {
       const update = await stripe.subscriptions.update(user?.subId, {
@@ -121,19 +123,48 @@ export const changeSub = async (req: Request, res: Response) => {
             id: subscription?.items?.data[0].id,
             price: planPrice,
           },
-        ],//
+        ], //
       });
-      console.log(120, update);
+
       if (update.id) {
-        
         updateData(update, usermail);
       }
-      res.send({ "GoodChange": update });
+      res.send({ GoodChange: update });
     } else {
       res.send("Something went wrong in change Sub");
     }
   } catch (error) {
     console.error(10, error);
     res.send({ failInChange: error });
+  }
+};
+
+export const cancelSub = async (req: Request, res: Response) => {
+  try {
+    const { usermail } = req.body;
+
+    const user = await prisma.user.findUnique({
+      where: {
+        mail: String(usermail),
+      },
+    });
+
+    const subscription = user?.subId
+      ? await stripe.subscriptions.retrieve(user?.subId)
+      : "Something went wrong in change Sub";
+    
+    if(subscription !== "Something went wrong in change Sub"){
+      const cancelSub =  await stripe.subscriptions.del(subscription?.id);
+      if(cancelSub.status === 'canceled'){
+        const deletingUser = deleteUser(usermail)
+        res.send({ "GoodCancel": deletingUser });
+      }
+     
+    } else {
+      res.send("Something went wrong in cancel Sub");
+    }
+  } catch (error) {
+    console.error(error);
+    res.send({ errorInCancelSub: error });
   }
 };

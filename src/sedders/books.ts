@@ -1,7 +1,7 @@
 export const seedBooks = [
   {
     title: "Frankenstein; Or, The Modern Prometheus",
-    cover: "https://www.gutenberg.org/cache/epub/84/pg84.cover.medium.jpg",
+    cover: "https://firebasestorage.googleapis.com/v0/b/bookflix-admin.appspot.com/o/Frankenstein.jpg?alt=media&token=0e06282b-5013-45dd-8a88-e4ef577db422",
     topics: [
       {
         name: "Gothic Fiction",
@@ -16,7 +16,7 @@ export const seedBooks = [
         name: "Science Fiction by Women",
       },
     ],
-    epub: "https://www.gutenberg.org/ebooks/84.epub.images",
+    epub: "https://firebasestorage.googleapis.com/v0/b/bookflix-admin.appspot.com/o/Frankenstein.epub?alt=media&token=0c817b11-df56-4f7b-9c46-19f21a08bb37",
     authors: [
       {
         name: "Shelley Mary Wollstonecraft",
@@ -30,7 +30,7 @@ export const seedBooks = [
   },
   {
     title: "Pride and Prejudice",
-    cover: "https://www.gutenberg.org/cache/epub/1342/pg1342.cover.medium.jpg",
+    cover: "https://firebasestorage.googleapis.com/v0/b/bookflix-admin.appspot.com/o/Pride%20and%20Prejudice.jpg?alt=media&token=a761c20f-acda-4968-862d-9306c5ffd779",
     topics: [
       {
         name: "Best Books Ever Listings",
@@ -39,7 +39,7 @@ export const seedBooks = [
         name: "Harvard Classics",
       },
     ],
-    epub: "https://www.gutenberg.org/ebooks/1342.epub.images",
+    epub: "https://firebasestorage.googleapis.com/v0/b/bookflix-admin.appspot.com/o/Pride%20and%20Prejudice.epub?alt=media&token=532d8478-a043-4e66-a389-61f52a92df68",
     authors: [
       {
         name: "Austen Jane",
@@ -53,13 +53,13 @@ export const seedBooks = [
   },
   {
     title: "Alice's Adventures in Wonderland",
-    cover: "https://www.gutenberg.org/cache/epub/11/pg11.cover.medium.jpg",
+    cover: "https://firebasestorage.googleapis.com/v0/b/bookflix-admin.appspot.com/o/Alice's%20Adventures%20in%20Wonderland.jpg?alt=media&token=8619dfee-1364-4752-b6cd-6430ebed70e2",
     topics: [
       {
         name: "Children's Literature",
       },
     ],
-    epub: "https://www.gutenberg.org/ebooks/11.epub.images",
+    epub: "https://firebasestorage.googleapis.com/v0/b/bookflix-admin.appspot.com/o/Alice's%20Adventures%20in%20Wonderland.epub?alt=media&token=8d4a78bc-17b0-49c8-8173-92a4a35fbe4d",
     authors: [
       {
         name: "Carroll Lewis",
@@ -74,9 +74,9 @@ export const seedBooks = [
   {
     title: "The Great Gatsby",
     cover:
-      "https://www.gutenberg.org/cache/epub/64317/pg64317.cover.medium.jpg",
+      "https://firebasestorage.googleapis.com/v0/b/bookflix-admin.appspot.com/o/The%20Great%20Gatsby.jpg?alt=media&token=8c17998b-51f5-4a96-9b1b-e57e30bff06f",
     topics: [],
-    epub: "https://www.gutenberg.org/ebooks/64317.epub.images",
+    epub: "https://firebasestorage.googleapis.com/v0/b/bookflix-admin.appspot.com/o/The%20Great%20Gatsby.epub?alt=media&token=e5e3aab7-d293-41b5-920c-2b13517122a9",
     authors: [
       {
         name: "Fitzgerald F. Scott (Francis Scott)",
@@ -90,7 +90,7 @@ export const seedBooks = [
   },
   {
     title: "The Adventures of Sherlock Holmes",
-    cover: "https://www.gutenberg.org/cache/epub/1661/pg1661.cover.medium.jpg",
+    cover: "https://firebasestorage.googleapis.com/v0/b/bookflix-admin.appspot.com/o/The%20Adventures%20of%20Sherlock%20Holmes.jpg?alt=media&token=709593f8-97c9-4822-85d7-77427cb7720e",
     topics: [
       {
         name: "Banned Books from Anne Haight's list",
@@ -102,7 +102,7 @@ export const seedBooks = [
         name: "Detective Fiction",
       },
     ],
-    epub: "https://www.gutenberg.org/ebooks/1661.epub.images",
+    epub: "https://firebasestorage.googleapis.com/v0/b/bookflix-admin.appspot.com/o/The%20Adventures%20of%20Sherlock%20Holmes.epub?alt=media&token=3de159b0-4f8e-4622-987e-b8331ea5ead3",
     authors: [
       {
         name: "Doyle Arthur Conan",
@@ -116,13 +116,13 @@ export const seedBooks = [
   },
   {
     title: "A Tale of Two Cities",
-    cover: "https://www.gutenberg.org/cache/epub/98/pg98.cover.medium.jpg",
+    cover: "https://firebasestorage.googleapis.com/v0/b/bookflix-admin.appspot.com/o/A%20Tale%20of%20Two%20Cities.jpg?alt=media&token=1c3ace70-bbdb-4025-8eb7-cc6ad266179f",
     topics: [
       {
         name: "Historical Fiction",
       },
     ],
-    epub: "https://www.gutenberg.org/ebooks/98.epub.images",
+    epub: "https://firebasestorage.googleapis.com/v0/b/bookflix-admin.appspot.com/o/A%20Tale%20of%20Two%20Cities.epub?alt=media&token=936f7240-1e50-40f6-9a48-57659e5a225d",
     authors: [
       {
         name: "Dickens Charles",
@@ -137,9 +137,9 @@ export const seedBooks = [
   {
     title: "Simple Sabotage Field Manual",
     cover:
-      "https://www.gutenberg.org/cache/epub/26184/pg26184.cover.medium.jpg",
+      "https://firebasestorage.googleapis.com/v0/b/bookflix-admin.appspot.com/o/Simple%20Sabotage%20Field%20Manual.jpg?alt=media&token=0a4f910c-1be3-4d5f-961f-680b96e10dfd",
     topics: [],
-    epub: "https://www.gutenberg.org/ebooks/26184.epub.images",
+    epub: "https://firebasestorage.googleapis.com/v0/b/bookflix-admin.appspot.com/o/Simple%20Sabotage%20Field%20Manual.epub?alt=media&token=f11743da-cb2e-4d71-8e90-3efeda01e0e3",
     authors: [
       {
         name: "United States. Office of Strategic Services",
@@ -153,7 +153,7 @@ export const seedBooks = [
   },
   {
     title: "The Picture of Dorian Gray",
-    cover: "https://www.gutenberg.org/cache/epub/174/pg174.cover.small.jpg",
+    cover: "https://firebasestorage.googleapis.com/v0/b/bookflix-admin.appspot.com/o/The%20Picture%20of%20Dorian%20Gray.jpg?alt=media&token=a77e6d41-3fbc-4a24-b2d7-04d75293c56b",
     topics: [
       {
         name: "Gothic Fiction",
@@ -162,7 +162,7 @@ export const seedBooks = [
         name: "Movie Books",
       },
     ],
-    epub: "https://www.gutenberg.org/ebooks/174.epub.images",
+    epub: "https://firebasestorage.googleapis.com/v0/b/bookflix-admin.appspot.com/o/The%20Picture%20of%20Dorian%20Gray.epub?alt=media&token=3b874e95-373e-439d-9a7d-5046e957f282",
     authors: [
       {
         name: "Wilde Oscar",
@@ -175,14 +175,14 @@ export const seedBooks = [
     ],
   },
   {
-    title: "A Doll's House : a play",
-    cover: "https://www.gutenberg.org/cache/epub/2542/pg2542.cover.small.jpg",
+    title: "A Doll's House ( a play)",
+    cover: "https://firebasestorage.googleapis.com/v0/b/bookflix-admin.appspot.com/o/A%20Doll's%20House%20(%20a%20play).jfif?alt=media&token=8895beaa-3924-41a8-b8a7-e7f61cf09ee1",
     topics: [
       {
         name: "Best Books Ever Listings",
       },
     ],
-    epub: "https://www.gutenberg.org/ebooks/2542.epub.images",
+    epub: "https://firebasestorage.googleapis.com/v0/b/bookflix-admin.appspot.com/o/A%20Doll's%20House%20(%20a%20play).epub?alt=media&token=261c53e9-8118-4c7e-b10a-346ef0561f98",
     authors: [
       {
         name: "Ibsen Henrik",
@@ -196,13 +196,13 @@ export const seedBooks = [
   },
   {
     title: "Moby Dick; Or, The Whale",
-    cover: "https://www.gutenberg.org/cache/epub/2701/pg2701.cover.medium.jpg",
+    cover: "https://firebasestorage.googleapis.com/v0/b/bookflix-admin.appspot.com/o/Moby%20Dick%3B%20Or%2C%20The%20Whale.jpg?alt=media&token=570660cb-6a15-42bf-a380-06fb0d1d32ab",
     topics: [
       {
         name: "Best Books Ever Listings",
       },
     ],
-    epub: "https://www.gutenberg.org/ebooks/2701.epub.images",
+    epub: "https://firebasestorage.googleapis.com/v0/b/bookflix-admin.appspot.com/o/Moby%20Dick%3B%20Or%2C%20The%20Whale.epub?alt=media&token=523be8b3-356c-48ea-8e62-a16554c584ce",
     authors: [
       {
         name: "Melville Herman",
