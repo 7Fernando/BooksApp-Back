@@ -32,11 +32,13 @@ export const updateData = async (subscription: any, email: any) => {
       },
     });
 
-    const userDate = await prisma.subInfo.create({
+    const userDate = await prisma.subInfo.update({
+      where: {
+        id:1,
+      },
       data: {
         currentStart: subscription.current_period_start,
         currentEnd: subscription.current_period_end,
-        ticket: subscription?.items.url,
         total: subscription.plan.amount,
         userId: Number(user?.id),
       },
