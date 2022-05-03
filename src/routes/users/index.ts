@@ -22,6 +22,7 @@ router.put('/',adminCheck,modifyUser)
 router.put('/modify', modifyUser)
 router.delete('/admin/:id',  adminCheck,  deleteUser)
 router.post('/admin/mail',  adminCheck, sendNewsletter)
+router.get('/admin/mail/:mail', adminCheck, getUserByMail)
 
 
 

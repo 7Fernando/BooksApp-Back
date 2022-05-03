@@ -8,6 +8,7 @@ export const getUser = async (req: Request, res: Response) => {
     const allUser = await prisma.user.findMany({
       include: {
         favorite: true,
+        subInfo: true
       },
     });
     allUser.length !== 0

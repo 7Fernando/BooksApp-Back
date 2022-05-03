@@ -16,6 +16,7 @@ router.put("/decrementlike",decrementLikeBook)
 router.post('/', postNewBook )
 router.get('/user/admin', adminCheck, getBooksUser)
 router.get('/user/admin/:id', adminCheck,  getBookByIdAdmin)
+router.delete('/user/admin/:id', adminCheck,deleteBook)
 
 
 
