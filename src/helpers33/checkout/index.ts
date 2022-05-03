@@ -26,21 +26,24 @@ export const saveData = async (subscription: any, email: any) => {
 
 export const updateData = async (subscription: any, email: any) => {
   try {
-    const user = await prisma.user.findUnique({
+    const user2 = await prisma.user.findUnique({
       where: {
         mail: email,
+      },
+      include: {
+        subInfo: true, // Returns all Profile fields
       },
     });
 
     const userDate = await prisma.subInfo.update({
       where: {
-        id:1,
+        id: user2?.subInfo[0].id,
       },
       data: {
         currentStart: subscription.current_period_start,
         currentEnd: subscription.current_period_end,
         total: subscription.plan.amount,
-        userId: Number(user?.id),
+        userId: Number(user2?.id),
       },
     });
   } catch (err) {
@@ -57,7 +60,7 @@ export const deleteUser = async (email: any) => {
       },
       data: { plan: notSub, subId: null },
     });
-    console.log(111, updateSubUser);
+  
     return updateSubUser;
   } catch (err) {
     console.error(err);
