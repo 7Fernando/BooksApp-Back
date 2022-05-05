@@ -18,8 +18,8 @@ router.put('/updateSub',updateSub)
 router.get("/", adminCheck, getUser);
 router.post("/", postUser);
 router.delete("/admin/:id", deleteUser);
-router.put('/',adminCheck,modifyUser)
-router.put('/modify', modifyUser)
+//router.put('/',adminCheck,modifyUser)
+router.put('/admin/modify',adminCheck, modifyUser)
 router.delete('/admin/:id',  adminCheck,  deleteUser)
 router.post('/admin/mail',  adminCheck, sendNewsletter)
 router.get('/admin/mail/:mail', adminCheck, getUserByMail)

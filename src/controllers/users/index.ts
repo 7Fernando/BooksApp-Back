@@ -73,20 +73,41 @@ export const getUserByMail = async (req: Request, res: Response) => {
 
 export const modifyUser = async (req: Request, res: Response) => {
   try {
-    const { role, id, picture, name } = req.body;
-    const updateUser = await prisma.user.update({
-      where: {
-        id: Number(id),
+
+    const { id  } = req.body;
+    console.log('id', id)
+    const change = await prisma.user.findUnique({
+      where:{
+        id: Number(id)
+      }
+      
+    })
+    change?.role === 'USER' ? await prisma.user.update({
+      where :{
+        id: change?.id
       },
-      data: {
-        picture: picture,
-        name: name,
-        role: role,
+      data:{
+        role : "ADMIN"
+      }
+    }) :  await prisma.user.update({
+      where :{
+        id: change?.id
       },
-    });
-    updateUser
-      ? res.status(200).send(updateUser)
-      : res.status(400).send("Usuario no encontrado");
+      data:{
+        role : "USER"
+      }
+    })
+    // const updateUser = await prisma.user.update({
+    //   where: {
+    //     id: Number(id),
+    //   },
+    //   data: {
+    //     role: role,
+    //   },
+    // });
+    change 
+      ? res.status(200).send(change)
+      : res.status(400).send("Usuario no updateado");
   } catch (error) {
     console.log(error);
   }
