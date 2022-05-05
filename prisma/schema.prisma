@@ -32,15 +32,15 @@ model Book {
 }
 
 model User {
-  id       Int        @id @default(autoincrement())
+  id       Int         @id @default(autoincrement())
   name     String
-  mail     String     @unique
+  mail     String      @unique
   picture  String?
-  subId    String?    @unique
-  role     Role       @default(USER)
+  subId    String?     @unique
+  role     Role        @default(USER)
   favorite Favorite[]
-  plan Suscription @default(NOT_SUBSCRIBED)
-  subInfo SubInfo[]
+  plan     Suscription @default(LOVER)
+  subInfo  SubInfo[]
 }
 
 enum Suscription {
@@ -49,14 +49,15 @@ enum Suscription {
   GROWTH
   LOVER
 }
+
 model SubInfo {
-  id     Int    @id @default(autoincrement())
-  user   User     @relation(fields: [userId], references: [id])
-  userId Int
-  ticket String
+  id           Int    @id @default(autoincrement())
+  user         User   @relation(fields: [userId], references: [id])
+  userId       Int
+  ticket       String
   currentStart Int
-  currentEnd Int
-  total Int
+  currentEnd   Int
+  total        Int
 }
 
 enum Role {
